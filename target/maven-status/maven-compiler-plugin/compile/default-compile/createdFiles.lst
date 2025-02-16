@@ -1,0 +1,15 @@
+com\joaoahaupt\dao\TaskDao.class
+com\joaoahaupt\dao\UserDao.class
+com\joaoahaupt\model\Folder$FolderBuilder.class
+com\joaoahaupt\commands\PingCommand.class
+com\joaoahaupt\model\User.class
+com\joaoahaupt\main.class
+com\joaoahaupt\dao\FolderDao.class
+com\joaoahaupt\model\User$UserBuilder.class
+com\joaoahaupt\model\Folder.class
+com\joaoahaupt\App.class
+com\joaoahaupt\config\DatabaseConnection.class
+com\joaoahaupt\commands\HelpCommand.class
+com\joaoahaupt\model\Task$TaskBuilder.class
+com\joaoahaupt\model\Task.class
+com\joaoahaupt\commands\FolderCommand.class
