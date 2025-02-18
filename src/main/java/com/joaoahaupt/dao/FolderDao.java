@@ -18,5 +18,5 @@ public interface FolderDao {
     void insertFolder(@Bind("name") String name, @Bind("description") String description, @Bind("user_id") Long userId);
 
     @SqlQuery("SELECT * FROM folders WHERE user_id = :id")
-    List<Folder> selectuserFolders(@Bind("id") Long id);
+    List<Folder> selectUserFolders(@Bind("id") Long id);
 }

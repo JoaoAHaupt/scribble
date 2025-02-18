@@ -36,7 +36,7 @@ public class FolderCommand extends ListenerAdapter {
             FolderDao folderDao = jdbi.onDemand(FolderDao.class);
             folderDao.insertFolder(name, description, id);
 
-            event.reply("📁 Pasta `" + name + "` criada com sucesso!")
+            event.reply("📁 Folder `" + name + "` created!")
                     .setEphemeral(true)
                     .queue();
         }
