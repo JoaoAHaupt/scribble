@@ -3,6 +3,7 @@ package com.joaoahaupt;
 import com.joaoahaupt.commands.*;
 import com.joaoahaupt.commands.util.RegisterCommand;
 import com.joaoahaupt.listener.FolderSelectListener;
+import com.joaoahaupt.listener.ModalSelectListener;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
@@ -23,7 +24,8 @@ public class App extends ListenerAdapter {
                                 new FolderCommand(),
                                 new RollCommand(),
                                 new AnnotationCommand(),
-                                new FolderSelectListener()
+                                new FolderSelectListener(),
+                                new ModalSelectListener()
                         )
                         .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                         .build()

@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import org.jdbi.v3.core.Jdbi;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.text.html.Option;
 import java.awt.*;
 import java.util.List;
 
@@ -39,16 +40,16 @@ public class AnnotationCommand extends ListenerAdapter {
                             return;
                         }
 
-                        StringSelectMenu.Builder selectMenuBuilder = StringSelectMenu.create("folder_select");
-
+                        StringSelectMenu.Builder selectMenuBuilderFolder = StringSelectMenu.create("folder_select");
                         for (Folder folder : folders) {
-                            selectMenuBuilder.addOption(folder.getName(), String.valueOf(folder.getId()));
+                            selectMenuBuilderFolder.addOption(folder.getName(), String.valueOf(folder.getId()));
                         }
 
-                        event.reply("Choose the folder")
+                        event.reply("Choose the folder for your annoatation")
                                 .setEphemeral(true)
-                                .addActionRow(selectMenuBuilder.build())
+                                .addActionRow(selectMenuBuilderFolder.build())
                                 .queue();
+
 
                         break;
 

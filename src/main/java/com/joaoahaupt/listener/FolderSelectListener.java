@@ -1,6 +1,8 @@
 package com.joaoahaupt.listener;
 
+import com.joaoahaupt.model.config.UserMemorySave;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
@@ -11,10 +13,13 @@ import org.jetbrains.annotations.NotNull;
 public class FolderSelectListener extends ListenerAdapter {
 
     @Override
-    public void onGenericSelectMenuInteraction(@NotNull GenericSelectMenuInteractionEvent event) {
+    public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (event.getComponentId().equals("folder_select")) {
 
-            String selectedFolder = (String) event.getValues().get(0);
+            UserMemorySave.insertFolder(
+                    event.getUser().getIdLong(),
+                    Long.valueOf(event.getValues().get(0))
+            );
 
             TextInput title = TextInput.create("title", "Title", TextInputStyle.SHORT)
                     .setPlaceholder("Title of the annotation")
@@ -28,21 +33,14 @@ public class FolderSelectListener extends ListenerAdapter {
                     .setMaxLength(1000)
                     .build();
 
-            TextInput tags = TextInput.create("tags", "Tags", TextInputStyle.SHORT)
-                    .setPlaceholder("Enter one of the following tags: 📚 Studies, 🎯 Work, 🎮 Leisure, 🏋️ Health, 💡 Ideas")
-                    .setMinLength(1)
-                    .setMaxLength(100)
-                    .build();
 
             Modal modal = Modal.create("create_annotation", "Create Annotation")
                     .addComponents(
                             ActionRow.of(title),
-                            ActionRow.of(description),
-                            ActionRow.of(tags)
+                            ActionRow.of(description)
                     )
                     .build();
 
-            // Enviando o modal para o usuário
             event.replyModal(modal).queue();
         }
     }
