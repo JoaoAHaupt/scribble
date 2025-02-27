@@ -19,7 +19,7 @@ public class HelpCommand extends ListenerAdapter {
                             "**» Lista de comandos** (3)\n" +
                             "```" +
                             "/help        → sh\n" +
-                            "/todo        → Gerencia sua lista de tarefas\n" +
+                            "/add        → Gerencia sua lista de tarefas\n" +
                             "/note        → Cria e gerencia anotações\n" +
                             "```")
                     .setColor(Color.BLUE)

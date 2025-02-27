@@ -50,19 +50,19 @@ public class AnnotationCommand extends ListenerAdapter {
                                 .addActionRow(selectMenuBuilderFolder.build())
                                 .queue();
 
-
+                        DatabaseConnection.closeConnection();
                         break;
 
                     case "view":
-                        List<Folder> folderss =  folderDao.selectUserFolders(event.getUser().getIdLong());
+                        List<Folder> foldersView =  folderDao.selectUserFolders(event.getUser().getIdLong());
 
-                        if (folderss.isEmpty()) {
+                        if (foldersView.isEmpty()) {
                             event.reply("No folders available. Please create a folder first.").queue();
                             return;
                         }
 
                         StringSelectMenu.Builder selectMenuBuilderFolderView = StringSelectMenu.create("folder_select_view");
-                        for (Folder folder : folderss) {
+                        for (Folder folder : foldersView) {
                             selectMenuBuilderFolderView.addOption(folder.getName(), String.valueOf(folder.getId()));
                         }
 
@@ -70,6 +70,8 @@ public class AnnotationCommand extends ListenerAdapter {
                                 .setEphemeral(true)
                                 .addActionRow(selectMenuBuilderFolderView.build())
                                 .queue();
+
+                        DatabaseConnection.closeConnection();
 
                         break;
 

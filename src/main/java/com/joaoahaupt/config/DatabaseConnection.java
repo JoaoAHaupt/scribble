@@ -13,24 +13,33 @@ public class DatabaseConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "Jazz!Skull15";
 
+    private static Connection connection;
+    private static Jdbi jdbi;
 
     public static Jdbi getJdbi() {
-        try {
-            Jdbi jdbi = Jdbi.create(DriverManager.getConnection(URL, USER, PASSWORD));
-            jdbi.installPlugin(new SqlObjectPlugin());
-            return jdbi;
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao conectar no banco!", e);
+        if (jdbi == null) {
+            try {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                jdbi = Jdbi.create(connection);
+                jdbi.installPlugin(new SqlObjectPlugin());
+            } catch (SQLException e) {
+                throw new RuntimeException("Erro ao conectar no banco!", e);
+            }
         }
+        return jdbi;
     }
 
-    public static void closeConnection(Connection connection) throws SQLException {
-
+    public static void closeConnection() {
         if (connection != null) {
             try {
-                connection.close();
+                if (!connection.isClosed()) {
+                    connection.close();
+                }
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar a conexão: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                connection = null;
+                jdbi = null;
             }
         }
     }

@@ -17,8 +17,10 @@ public class TagListener extends ListenerAdapter {
     @Override
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (event.getComponentId().equals("tag_select")) {
+
+            event.deferReply().queue();
+
             Annotation annotation = UserMemorySave.selectAnnotation(event.getUser().getIdLong());
-            System.out.println(annotation.toString());
 
             Jdbi jdbi = (DatabaseConnection.getJdbi());
             AnnotationDao annotationDao = jdbi.onDemand(AnnotationDao.class);
@@ -36,7 +38,7 @@ public class TagListener extends ListenerAdapter {
                     annotation.getFolderId()
             );
 
-            event.getHook().sendMessage("Annotation: **" + annotation.getTitle() + "** created!").queue();
+            event.getHook().sendMessage("Annotation: 📝`" + annotation.getTitle() + "` created!").queue();
         }
     }
 }

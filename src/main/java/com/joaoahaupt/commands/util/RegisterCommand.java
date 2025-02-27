@@ -35,22 +35,26 @@ public class RegisterCommand {
                                             .addChoice("100", 100),
                                     new OptionData(OptionType.INTEGER, "modifier", "A boon or bane to alter thy fate")
                             ),
-
+                        Commands.slash("play", "Play music or select an RPG scenario to play")
+                                .addSubcommands(
+                                        new SubcommandData("scenario", "Select an RPG scenario to play a song")
+                                                .addOptions(
+                                                        new OptionData(OptionType.STRING, "place", "Choose a place for the scenario")
+                                                                .addChoice("Tavern Ambience", "tavern_ambience")
+                                                                .addChoice("Forest Ambience", "forest_ambience")
+                                                                .addChoice("Dungeon Ambience", "dungeon_ambience")
+                                                                .addChoice("Battle", "battle")
+                                                                .setRequired(true)
+                                                ),
+                                        new SubcommandData("file", "Play a file")
+                                                .addOptions(
+                                                        new OptionData(OptionType.STRING, "file_name", "Provide the name of the file to play")
+                                                                .setRequired(true)
+                                                )
+                                ),
                         Commands.slash("annotation", "📜 Manage thy sacred annotations!")
                                 .addSubcommands(
                                         new SubcommandData("create", "Create an annotation"),
-//                                                .addOptions(
-//                                                        new OptionData(OptionType.STRING, "folder", "The folder to store thy annotation", true),
-//                                                        new OptionData(OptionType.STRING, "title", "The title of the annotation", true),
-//                                                        new OptionData(OptionType.STRING, "description", "The lore of the annotation", true),
-//                                                        new OptionData(OptionType.STRING, "tag", "The tag of the annotation", true)
-//                                                                .addChoice()
-//                                                                .addChoice()
-//                                                                .addChoice()
-//                                                                .addChoice()
-//                                                                .addChoice(),
-//                                                        new OptionData(OptionType.STRING, "attachments", "Attach thy scrolls", false)
-//                                                )
                                         new SubcommandData("view", "List all annotations in a folder")
 //                                        new SubcommandData("delete", "Delete an annotation")
 //                                                .addOptions(
