@@ -1,5 +1,6 @@
 package com.joaoahaupt.listener;
 
+import com.joaoahaupt.model.Annotation;
 import com.joaoahaupt.model.User;
 import com.joaoahaupt.model.config.UserMemorySave;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -18,9 +19,17 @@ public class ModalSelectListener extends ListenerAdapter {
         if (event.getModalId().equals("create_annotation")) {
             String title = event.getValue("title").getAsString();
             String description = event.getValue("description").getAsString();
+            String link = event.getValue("link").getAsString();
 
-            System.out.println("Título: " + title);
-            System.out.println("Descrição: " + description);
+            Annotation annotation = UserMemorySave.selectAnnotation(event.getUser().getIdLong());
+            annotation.setTitle(title);
+            annotation.setDescription(description);
+            annotation.setLink(link);
+
+            UserMemorySave.insertAnnotation(
+                    event.getUser().getIdLong(),
+                    annotation
+            );
 
             StringSelectMenu.Builder tagMenuBuilder = StringSelectMenu.create("tag_select")
                     .addOption("📚 Studies", "studies")

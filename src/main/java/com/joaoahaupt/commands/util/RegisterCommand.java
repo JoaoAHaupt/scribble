@@ -51,8 +51,7 @@ public class RegisterCommand {
 //                                                                .addChoice(),
 //                                                        new OptionData(OptionType.STRING, "attachments", "Attach thy scrolls", false)
 //                                                )
-                                        new SubcommandData("list", "List all annotations in a folder")
-                                                .addOptions(new OptionData(OptionType.STRING, "folder", "The folder to list annotations from", true))
+                                        new SubcommandData("view", "List all annotations in a folder")
 //                                        new SubcommandData("delete", "Delete an annotation")
 //                                                .addOptions(
 //                                                        new OptionData(OptionType.STRING, "folder", "The folder where thy annotation resides", true),

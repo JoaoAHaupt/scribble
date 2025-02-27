@@ -1,27 +1,24 @@
 package com.joaoahaupt.model.config;
 
+import com.joaoahaupt.model.Annotation;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserMemorySave {
 
-    private static final Map<Long, Long> selectedFolders = new HashMap<>();
-    private static final Map<Long, String> tagsFolders = new HashMap<>();
+    private static final Map<Long, Annotation> annotations = new HashMap<>();
 
-    public static void insertTag(Long id, String tag){
-        tagsFolders.put(id, tag);
+    public static Annotation selectAnnotation(Long id){
+        return annotations.get(id);
     }
 
-    public static void deleteTag(Long id){
-        tagsFolders.remove(id);
+    public static void insertAnnotation(Long id, Annotation tag){
+        annotations.put(id, tag);
     }
 
-    public static void insertFolder(Long id, Long idFolder){
-        selectedFolders.put(id, idFolder);
-    }
-
-    public static void deleteFolder(Long id){
-        selectedFolders.remove(id);
+    public static void deleteAnnotation(Long id){
+        annotations.remove(id);
     }
 
 

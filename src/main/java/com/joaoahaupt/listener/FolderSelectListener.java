@@ -1,5 +1,6 @@
 package com.joaoahaupt.listener;
 
+import com.joaoahaupt.model.Annotation;
 import com.joaoahaupt.model.config.UserMemorySave;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
@@ -16,15 +17,24 @@ public class FolderSelectListener extends ListenerAdapter {
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (event.getComponentId().equals("folder_select")) {
 
-            UserMemorySave.insertFolder(
+            Annotation annotation = new Annotation();
+            annotation.setFolderId(Long.valueOf(event.getValues().get(0)));
+
+            UserMemorySave.insertAnnotation(
                     event.getUser().getIdLong(),
-                    Long.valueOf(event.getValues().get(0))
+                    annotation
             );
 
             TextInput title = TextInput.create("title", "Title", TextInputStyle.SHORT)
                     .setPlaceholder("Title of the annotation")
                     .setMinLength(10)
                     .setMaxLength(100)
+                    .build();
+
+            TextInput link = TextInput.create("link", "Link", TextInputStyle.SHORT)
+                    .setPlaceholder("Link of the annotation")
+                    .setMinLength(10)
+                    .setMaxLength(300)
                     .build();
 
             TextInput description = TextInput.create("description", "Description", TextInputStyle.PARAGRAPH)
@@ -37,7 +47,9 @@ public class FolderSelectListener extends ListenerAdapter {
             Modal modal = Modal.create("create_annotation", "Create Annotation")
                     .addComponents(
                             ActionRow.of(title),
+                            ActionRow.of(link),
                             ActionRow.of(description)
+
                     )
                     .build();
 

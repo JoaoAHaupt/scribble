@@ -30,9 +30,9 @@ public class AnnotationCommand extends ListenerAdapter {
                 AnnotationDao annotationDao = jdbi.onDemand(AnnotationDao.class);
                 FolderDao folderDao = jdbi.onDemand(FolderDao.class);
 
+
                 switch (subcommand) {
                     case "create":
-
                         List<Folder> folders =  folderDao.selectUserFolders(event.getUser().getIdLong());
 
                         if (folders.isEmpty()) {
@@ -54,7 +54,23 @@ public class AnnotationCommand extends ListenerAdapter {
                         break;
 
                     case "view":
-                        event.reply("You are trying to view an annotation!").queue();
+                        List<Folder> folderss =  folderDao.selectUserFolders(event.getUser().getIdLong());
+
+                        if (folderss.isEmpty()) {
+                            event.reply("No folders available. Please create a folder first.").queue();
+                            return;
+                        }
+
+                        StringSelectMenu.Builder selectMenuBuilderFolderView = StringSelectMenu.create("folder_select_view");
+                        for (Folder folder : folderss) {
+                            selectMenuBuilderFolderView.addOption(folder.getName(), String.valueOf(folder.getId()));
+                        }
+
+                        event.reply("Choose the folder to see your")
+                                .setEphemeral(true)
+                                .addActionRow(selectMenuBuilderFolderView.build())
+                                .queue();
+
                         break;
 
                     default:
