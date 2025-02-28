@@ -1,4 +1,4 @@
-package com.joaoahaupt.listener;
+package com.joaoahaupt.listeners.annotation.select;
 
 import com.joaoahaupt.config.DatabaseConnection;
 import com.joaoahaupt.dao.AnnotationDao;
@@ -26,31 +26,31 @@ public class ViewAnnotationListener extends ListenerAdapter {
                 List<Annotation> annotations = annotationDao.selectAnnotationFolder(folderId);
 
                 if (annotations.isEmpty()) {
-                    event.reply(":x: **You don't have any annotation.**").setEphemeral(true).queue();
+                    event.reply(":x: **Alas! No scrolls of wisdom dost thou possess.**").setEphemeral(true).queue();
                     return;
                 }
 
                 EmbedBuilder embedBuilder = new EmbedBuilder()
-                        .setTitle("📜 Annotations")
+                        .setTitle("📜 Sacred Scrolls of Knowledge")
                         .setColor(new Color(135, 67, 218))
-                        .setFooter("Use the commands to .", "https://cdn-icons-png.flaticon.com/512/3043/3043893.png");
+                        .setFooter("Use these commands wisely, traveler to see your scrolls...", "https://cdn-icons-png.flaticon.com/512/3043/3043893.png");
 
                 for (Annotation annotation : annotations) {
                     embedBuilder.addField("📝 " + annotation.getTitle() +" " +annotation.getTag() +" "+ annotation.getCreated(),
-                            "**Description:** `" + annotation.getDescription() + "`\n" +"**Link:** `" + annotation.getLink() + "`"
+                            "**Description:** `" + annotation.getDescription() + "`\n" +"**Link to wisdom:** " + annotation.getLink()
                             , false);
                 }
 
                 event.
                         replyEmbeds(embedBuilder.build())
                         .addActionRow(
-                                Button.primary("prev", "⬅️"),
-                                Button.danger("close", "❌"),
-                                Button.primary("next", "➡️")
+                                Button.primary("prev", "⬅️ Turn back time"),
+                                Button.danger("close", "❌ Burn the scroll"),
+                                Button.primary("next", "➡️ Advance the legend")
                         ).queue();
 
             } catch (NumberFormatException e) {
-                event.reply(":x: **Errr:** Invalid ID.").setEphemeral(true).queue();
+                event.reply(":x: **Woe upon thee!** The number thou hast entered is most unworthy.").setEphemeral(true).queue();
             }
         }
     }

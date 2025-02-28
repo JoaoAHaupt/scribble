@@ -2,10 +2,12 @@ package com.joaoahaupt;
 
 import com.joaoahaupt.commands.*;
 import com.joaoahaupt.commands.util.RegisterCommand;
-import com.joaoahaupt.listener.FolderSelectListener;
-import com.joaoahaupt.listener.ModalSelectListener;
-import com.joaoahaupt.listener.TagListener;
-import com.joaoahaupt.listener.ViewAnnotationListener;
+import com.joaoahaupt.listeners.annotation.create.FolderSelectListener;
+import com.joaoahaupt.listeners.annotation.create.ModalSelectListener;
+import com.joaoahaupt.listeners.annotation.create.TagListener;
+import com.joaoahaupt.listeners.annotation.delete.DeleteAnnotationListener;
+import com.joaoahaupt.listeners.annotation.delete.FolderSelectDeleteAnnotationListener;
+import com.joaoahaupt.listeners.annotation.select.ViewAnnotationListener;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
@@ -29,7 +31,9 @@ public class App extends ListenerAdapter {
                                 new FolderSelectListener(),
                                 new ModalSelectListener(),
                                 new ViewAnnotationListener(),
-                                new TagListener()
+                                new TagListener(),
+                                new FolderSelectDeleteAnnotationListener(),
+                                new DeleteAnnotationListener()
                         )
                         .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                         .build()

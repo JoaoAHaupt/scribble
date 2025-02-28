@@ -27,6 +27,10 @@ public interface AnnotationDao {
                     @Bind("folder_id") Long folderId
     );
 
+    @SqlUpdate("DELETE FROM annotations WHERE id=:id")
+    void deleteAnnotation(@Bind("id") Long id);
+
     @SqlQuery("SELECT *  FROM annotations WHERE folder_id = :folder_id")
     List<Annotation> selectAnnotationFolder(@Bind("folder_id") Long folderId);
+
 }

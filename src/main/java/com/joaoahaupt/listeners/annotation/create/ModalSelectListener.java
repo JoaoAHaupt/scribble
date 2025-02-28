@@ -1,16 +1,10 @@
-package com.joaoahaupt.listener;
+package com.joaoahaupt.listeners.annotation.create;
 
 import com.joaoahaupt.model.Annotation;
-import com.joaoahaupt.model.User;
 import com.joaoahaupt.model.config.UserMemorySave;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
-import net.dv8tion.jda.api.interactions.components.text.TextInput;
-import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
-import net.dv8tion.jda.api.interactions.modals.Modal;
 import org.jetbrains.annotations.NotNull;
 
 public class ModalSelectListener extends ListenerAdapter {

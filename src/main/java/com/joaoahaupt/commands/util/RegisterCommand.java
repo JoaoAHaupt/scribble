@@ -55,7 +55,8 @@ public class RegisterCommand {
                         Commands.slash("annotation", "📜 Manage thy sacred annotations!")
                                 .addSubcommands(
                                         new SubcommandData("create", "Create an annotation"),
-                                        new SubcommandData("view", "List all annotations in a folder")
+                                        new SubcommandData("view", "List all annotations in a folder"),
+                                        new SubcommandData("delete", "Delete annotation")
 //                                        new SubcommandData("delete", "Delete an annotation")
 //                                                .addOptions(
 //                                                        new OptionData(OptionType.STRING, "folder", "The folder where thy annotation resides", true),
